@@ -7,12 +7,32 @@ version = '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+    maven {
+        url "https://mvnrepository.com/artifact/clojure-interop/java.awt"
+    }
 }
 
 dependencies {
-    implementation 'clojure-interop:java.awt:1.0.2'
+    implementation 'com.github.kwhat:jnativehook:2.2.2'
+    implementation 'org.reflections:reflections:0.10.2'
+    implementation 'org.slf4j:slf4j-api:2.0.13'
+    implementation 'org.slf4j:slf4j-log4j12:2.0.13'
+    compileOnly 'org.projectlombok:lombok:1.18.32'
+    annotationProcessor 'org.projectlombok:lombok:1.18.32'
     testImplementation platform('org.junit:junit-bom:5.9.1')
     testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDir 'src/main/resources'
+        }
+    }
+}
+
+tasks.withType(Copy) {
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 test {
